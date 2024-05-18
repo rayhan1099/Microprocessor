@@ -1,0 +1,29 @@
+.DATA
+M1 DB 'ENTER THE NUMBER $'
+M2 DB 'THE NUMBER IS EVEN $'
+M3 DB 'THE NUMBER IS ODD $'
+.CODE
+MAIN PROC
+    MOV AX,@DATA
+    MOV DS,AX
+    MOV AH,9
+    LEA DX,M1
+    INT 21H
+    MOV AH,1   
+    INT 21H 
+    MOV BL,2H
+    DIV BL
+    CMP AH,0H
+    JZ EVEN
+    ODD: 
+    MOV AH,9
+    LEA DX,M3
+    INT 21H
+    JMP FINISH
+    EVEN:
+    MOV AH,9
+    LEA DX,M2
+    INT 21H
+    FINISH:
+    MAIN ENDP
+    END MAIN
